@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Jua:400');
+
+:root {
+  --primary-color: #00c58e;
+}
+
+* {
+  font-family: Jua;
+  margin: 0;
+}
+
+.el-tabs__nav-wrap::after {
+  background-color: white;
+}
+
+.el-tabs__item:hover {
+  color: #00c58e;
+}
+
+.el-tabs__item.is-active {
+  color: #00c58e;
+}
+
+.el-tabs__active-bar {
+  background-color: #00c58e;
+  height: 5px;
+}
+
+.el-tabs__item {
+  font-size: 20px;
+}
+
+.el-card {
+  border-radius: 15px;
+}
+
+
+.el-menu-item.is-active {
+  color: #00c58e;
+}
+
+.el-carousel__container {
+  left: 7%;
+  height: 600px;
+}
+
+.el-carousel__arrow--right {
+  right: 38%;
+  top: 40%;
+}
+
+.el-carousel__arrow--left {
+  top: 40%;
+  left: 18%;
+}
+
+.el-carousel__arrow {
+  height: 70px;
+  width: 70px;
+}
+
+.el-dialog {
+  border-radius: 20px;
+  height: 600px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.el-dialog__header {
+  padding: 30px 30px 10px;
+}
+
+.el-dialog__body {
+  padding: 10px 30px 10px;
+}
+
+.el-dialog__title {
+  font-size: 25px;
+  font-family: HY그래픽M;
+  font-weight: bold;
+}
+.el-upload--picture-card {
+  background-color: aliceblue;
+  border: 1px dashed #009281;
+}
+
+.el-form-item__label{
+  text-align: left;
+}
+
+.el-button--primary {
+  background-color: #009281;
+}
+
+.el-button:focus, .el-button:hover {
+  color: #409EFF;
+  border-color: #BFE4E0;
+  background-color: #BFE4E0;
+}
+
+.el-message-box{
+  width: 450px;
+}
+
+.el-message-box__content{
+  font-size: 18px;
+}
+
