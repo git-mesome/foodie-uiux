@@ -62,7 +62,7 @@
 
 .el-dialog {
   border-radius: 20px;
-  height: 600px;
+  height: 700px;
   width: 700px;
   display: flex;
   flex-direction: column;
@@ -96,9 +96,9 @@
 }
 
 .el-button:focus, .el-button:hover {
-  color: #409EFF;
+  color: white;
   border-color: #BFE4E0;
-  background-color: #BFE4E0;
+  background-color: #00c58e;
 }
 
 .el-message-box{
@@ -109,3 +109,8 @@
   font-size: 18px;
 }
 
+.el-textarea__inner{
+  border-radius: 10px;
+  line-height: 1.8;
+  padding: 10px 15px;
+}

@@ -24,10 +24,10 @@
     <SearchInput @search="searchPostList"/>
 
     <el-menu-item class="navbar__user" index="7">
-      <nuxt-link v-if="$store.state.auth.loginInfo.accessToken === ''" :to="{path:'/login'}">로그인</nuxt-link>
+      <nuxt-link v-if="!$store.state.auth.loginInfo.accessToken" :to="{path:'/login'}">로그인</nuxt-link>
       <div v-else>
         <el-dropdown>
-          <el-image src="chat-box.png" style="width: 48px; margin-right: 10px"></el-image>
+          <el-image @click="enterChatRoom" src="chat-box.png" style="width: 48px; margin-right: 10px"></el-image>
         </el-dropdown>
         <el-dropdown>
           <span>{{ $store.state.auth.loginInfo.nickname }}님<i class="el-icon-arrow-down el-icon--right"></i></span>
@@ -78,7 +78,9 @@ export default {
       await this.$store.dispatch('fetchSearchPosts', keyword);
       await this.$router.push('/posts/search')
     },
-
+    enterChatRoom(){
+      this.$router.push('/chats');
+    }
   }
 }
 </script>

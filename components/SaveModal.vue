@@ -30,10 +30,11 @@
             <el-option label="간식" value="간식"></el-option>
             <el-option label="라면" value="라면"></el-option>
             <el-option label="냉동식품" value="냉동식품"></el-option>
+            <el-option label="기타" value="기타"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="내용" prop="content">
-          <el-input type="textarea" autosize placeholder="내용을 입력해주세요. ex) 유효기간, 만남 장소"
+          <el-input type="textarea"  :autosize="{ minRows: 6, maxRows: 6}" placeholder="내용을 입력해주세요. ex) 유효기간, 만남 장소"
                     v-model="ruleForm.content"></el-input>
         </el-form-item>
       </el-form>

@@ -43,7 +43,7 @@ export default {
   name: "Popular",
   data() {
     return {
-      posts: [],
+      // posts: [],
       fit: 'cover'
     }
   },
@@ -57,7 +57,7 @@ export default {
     },
     async moveDetailPage(id) {
       await this.$store.dispatch('fetchPostDetail', id);
-      await this.$router.push(`posts/${id}`);
+      await this.$router.push(`/posts/${id}`);
     },
     async like(postId) {
       await this.$store.dispatch('fetchLikes', postId);

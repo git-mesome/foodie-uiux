@@ -2,7 +2,7 @@
   <div class="detailPage">
     <el-carousel type="card" :autoplay="false" arrow="always" indicator-position="none">
       <el-carousel-item v-for="(path, i) in $store.state.postDetail.postImagePath" :key="i">
-        <el-image style="height: 400px; width: 100%" :fit="fit" :src="path" alt="게시한 이미지"/>
+        <el-image style="height: 400px; width: 100%" :fit="fit" :src="path" alt="게시한 이미지" :preview-src-list="path" />
       </el-carousel-item>
     </el-carousel>
     <div class="author">
@@ -12,13 +12,14 @@
                    style="margin-left: 13px" alt="작성자프로필"/>
         <span class="author-info">
         {{ $store.state.postDetail.authorNickname }}
-        <span style="font-family: 'Noto Sans KR'">
-        {{ $store.state.postDetail.siGunGu }} {{ $store.state.postDetail.eupMyeonDong }}
-        </span>
+             <span class="grade">{{ $store.state.postDetail.authorGrade }}   </span>
+          <span style="font-family: 'Noto Sans KR'">
+            {{ $store.state.postDetail.siGunGu || "" }} {{ $store.state.postDetail.eupMyeonDong || "지역정보없음" }}</span>
         </span>
       </span>
-      <span class="grade">{{ $store.state.postDetail.authorGrade }}
-      </span>
+      <el-button class="enter-chat" icon="el-icon-s-promotion"
+                 @click="doChat($store.state.postDetail.postId)">채팅하기
+      </el-button>
     </div>
     <el-divider></el-divider>
     <p class="title-header">
@@ -29,10 +30,10 @@
     </p>
     <p class="category">카테고리 - {{ $store.state.postDetail.category }} 🌱 게시 날짜
       {{ $store.state.postDetail.createDate.split(" ")[0] }}</p>
-    <p class="content">{{ $store.state.postDetail.content }}</p>
+    <pre class="content">{{ $store.state.postDetail.content }}</pre>
     <p class="detail" style="color: #9B9B9B; margin-bottom: 16px">
       관심 {{ $store.state.postDetail.likesCount }} 조회 {{ $store.state.postDetail.hit }}
-      </p>
+    </p>
     <el-button-group v-if="$store.state.auth.loginInfo.nickname === $store.state.postDetail.authorNickname">
       <el-button icon="el-icon-edit"></el-button>
       <el-button type="danger" icon="el-icon-delete" @click="deletePost($store.state.postDetail.postId)"></el-button>
@@ -72,9 +73,17 @@ export default {
             message: '게시물을 삭제하였습니다.',
             type: 'success',
           })
-         await this.$router.push(`/posts/${this.$store.state.postDetail.postType}`);
+          await this.$router.push(`/posts/${this.$store.state.postDetail.postType}`);
         })
     },
+    async doChat(id){
+      await this.$axios.post(`/api/chats/${id}`,{
+        headers: {
+          Authorization: 'Bearer ' + this.$store.state.auth.loginInfo.accessToken
+        }
+      });
+      await this.$router.push('/chats');
+    }
   }
 }
 </script>
@@ -118,11 +127,22 @@ export default {
 }
 
 .grade {
+  padding-left: 10px;
+  font-family: "Noto Sans KR", sans-serif !important;
+  font-size: 20px;
+}
+
+.enter-chat {
   display: flex;
   justify-content: right;
   align-items: center;
-  font-family: "Noto Sans KR", sans-serif !important;
-  font-size: 20px;
+  background-color: #18A48A;
+  color: white;
+  width: 150px;
+  height: 55px;
+  font-size: 17px;
+  border-radius: 15px;
+  padding: 12px 35px;
 }
 
 .title-header {
@@ -159,7 +179,7 @@ export default {
 .content {
   font-family: "Nanum Gothic Coding";
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1;
   letter-spacing: -0.3px;
   margin: 16px 0;
   word-break: break-all;
@@ -169,7 +189,7 @@ export default {
   justify-content: left;
 }
 
-.el-button-group{
+.el-button-group {
   display: flex;
   margin-bottom: 10px;
   justify-content: right;

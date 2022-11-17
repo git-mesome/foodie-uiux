@@ -3,9 +3,10 @@ export const state = () => ({
   postDetail: {},
   searchKeyword: "",
   searchPosts: [],
-  populars:[],
+  populars: [],
   likes: {},
   unlikes: {},
+  chatList: []
 })
 
 export const mutations = {
@@ -21,8 +22,11 @@ export const mutations = {
   setSearchPosts(state, searchPosts) {
     state.searchPosts = searchPosts;
   },
-  setPopular(state,populars){
+  setPopular(state, populars) {
     state.populars = populars;
+  },
+  setChatList(state, chatList) {
+    state.chatList = chatList;
   },
   setLikes(state, postId) {
     const post = state.posts.filter(post => post.postId === postId).pop()
@@ -71,7 +75,7 @@ export const actions = {
     context.commit('setSearchKeyword', keyword);
     context.commit('setSearchPosts', response.data);
   },
-  async fetchPopularPosts(context, path){
+  async fetchPopularPosts(context, path) {
     const response = await this.$axios.get(`/api/posts?postType=${path}&hit=pupular`, {
       headers: {
         Authorization: 'Bearer ' + context.state.auth.loginInfo.accessToken
@@ -79,8 +83,16 @@ export const actions = {
     });
     context.commit('setPopular', response.data);
   },
+  async fetchChatList(context, id) {
+    const response = await this.$axios.get(`/api/chats/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + context.state.auth.loginInfo.accessToken
+      }
+    });
+    context.commit('setChatList', response.data);
+  },
   async fetchLikes(context, id) {
-    await this.$axios.post(`/api/posts/${id}/likes`, {},{
+    await this.$axios.post(`/api/posts/${id}/likes`, {}, {
       headers: {
         Authorization: 'Bearer ' + context.state.auth.loginInfo.accessToken
       }
@@ -88,7 +100,7 @@ export const actions = {
     context.commit('setLikes', id);
   },
   async fetchUnlikes(context, id) {
-    await this.$axios.delete(`/api/posts/${id}/likes`,{
+    await this.$axios.delete(`/api/posts/${id}/likes`, {
       headers: {
         Authorization: 'Bearer ' + context.state.auth.loginInfo.accessToken
       }

@@ -63,15 +63,6 @@ export default {
       const path = this.$route.path.split("/")[2];
       await this.$store.dispatch('fetchPosts', path);
     },
-    // async handleClick(tab, event) {
-    //   if (this.activeName === 'free') {
-    //     await this.$store.dispatch('fetchPosts', 'free')
-    //   } else if (this.activeName === 'exchange') {
-    //     await this.$store.dispatch('fetchPosts', 'exchange')
-    //   } else {
-    //     await this.$store.dispatch('fetchPosts', 'recipe')
-    //   }
-    // },
     async moveDetailPage(id) {
       await this.$store.dispatch('fetchPostDetail', id);
       await this.$router.push(`/posts/${id}`);
