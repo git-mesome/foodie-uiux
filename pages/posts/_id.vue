@@ -2,7 +2,7 @@
   <div class="detailPage">
     <el-carousel type="card" :autoplay="false" arrow="always" indicator-position="none">
       <el-carousel-item v-for="(path, i) in $store.state.postDetail.postImagePath" :key="i">
-        <el-image style="height: 400px; width: 100%" :fit="fit" :src="path" alt="게시한 이미지" :preview-src-list="path" />
+        <el-image style="height: 400px; width: 100%" :fit="fit" :src="path" alt="게시한 이미지" :preview-src-list="path"/>
       </el-carousel-item>
     </el-carousel>
     <div class="author">
@@ -17,7 +17,7 @@
             {{ $store.state.postDetail.siGunGu || "" }} {{ $store.state.postDetail.eupMyeonDong || "지역정보없음" }}</span>
         </span>
       </span>
-      <el-button class="enter-chat" icon="el-icon-s-promotion"
+      <el-button v-if="!($store.state.postDetail.authorNickname === $store.state.auth.loginInfo.nickname)" class="enter-chat" icon="el-icon-s-promotion"
                  @click="doChat($store.state.postDetail.postId)">채팅하기
       </el-button>
     </div>
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       postDetail: {},
-      path: {},
+      path: [],
       fit: 'cover'
     }
   },
@@ -76,14 +76,16 @@ export default {
           await this.$router.push(`/posts/${this.$store.state.postDetail.postType}`);
         })
     },
-    async doChat(id){
-      await this.$axios.post(`/api/chats/${id}`,{
+    async doChat(id) {
+      const response =
+        await this.$axios.post(`/api/chats/${id}`, {
         headers: {
           Authorization: 'Bearer ' + this.$store.state.auth.loginInfo.accessToken
         }
       });
-      await this.$router.push('/chats');
-    }
+      // await this.$store.dispatch('fetchMessage', response.data.chatRoomId)
+      await this.$router.push({name: 'chats', query: {id: response.data.chatRoomId}})
+    },
   }
 }
 </script>

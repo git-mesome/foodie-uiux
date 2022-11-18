@@ -15,7 +15,7 @@ export default {
     script: [
       {
         src: 'https://developers.kakao.com/sdk/js/kakao.js'
-      }
+      },
     ]
   },
 
@@ -26,6 +26,7 @@ export default {
   plugins: ['@/plugins/element-ui',
     {src: '@/plugins/kakao-login', mode: 'client'},
     {src: '@/plugins/persisted-state', mode: 'client'},
+    '@/plugins/vue-chat-scroll',
   ],
 
 

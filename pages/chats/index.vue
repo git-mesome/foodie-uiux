@@ -10,10 +10,10 @@
         </el-row>
         <el-row class="chat-item">
           <el-col class="middle">
-            <ChatList/>
+            <ChatList @selectChatRoom="selectChatRoom"/>
           </el-col>
           <el-col class="right">
-            <Message/>
+            <Message v-if="selectedChatRoom" :selected-chat-room="selectedChatRoom"/>
           </el-col>
         </el-row>
       </el-col>
@@ -28,8 +28,29 @@ import TopTitle from "../../components/chat/TopTitle";
 import ChatList from "../../components/chat/ChatList";
 
 export default {
-  components: {ChatList, Message, DashBoard,TopTitle},
+  components: {ChatList, Message, DashBoard, TopTitle},
   layout: 'chat',
+  data() {
+    return {
+      selectedChatRoom: undefined,
+    }
+  },
+  created() {
+    this.selectedChatRoom =  this.$route.query.id ?
+      {
+        chatRoomId: this.$route.query.id,
+        postTitle: this.$store.state.postDetail.title,
+        postImagePath: this.$store.state.postDetail.postImagePath[0]
+      } : undefined
+  },
+  methods: {
+    selectChatRoom(chatRoom) {
+      this.selectedChatRoom = undefined
+      setTimeout(() => {
+        this.selectedChatRoom = chatRoom
+      });
+    },
+  },
 }
 </script>
 

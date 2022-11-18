@@ -6,7 +6,8 @@ export const state = () => ({
   populars: [],
   likes: {},
   unlikes: {},
-  chatList: []
+  chatList: [],
+  message: [],
 })
 
 export const mutations = {
@@ -27,6 +28,9 @@ export const mutations = {
   },
   setChatList(state, chatList) {
     state.chatList = chatList;
+  },
+  setMessage(state, message) {
+    state.message = message;
   },
   setLikes(state, postId) {
     const post = state.posts.filter(post => post.postId === postId).pop()
@@ -76,20 +80,28 @@ export const actions = {
     context.commit('setSearchPosts', response.data);
   },
   async fetchPopularPosts(context, path) {
-    const response = await this.$axios.get(`/api/posts?postType=${path}&hit=pupular`, {
+    const response = await this.$axios.get(`/api/posts?postType=${path}&hit=popular`, {
       headers: {
         Authorization: 'Bearer ' + context.state.auth.loginInfo.accessToken
       }
     });
     context.commit('setPopular', response.data);
   },
-  async fetchChatList(context, id) {
-    const response = await this.$axios.get(`/api/chats/${id}`, {
+  async fetchChatList(context) {
+    const response = await this.$axios.get(`/api/chats`, {
       headers: {
         Authorization: 'Bearer ' + context.state.auth.loginInfo.accessToken
       }
     });
     context.commit('setChatList', response.data);
+  },
+  async fetchMessage(context,id){
+    const response = await this.$axios.get(`/api/chats/${id}`,{
+      headers: {
+        Authorization: 'Bearer ' + context.state.auth.loginInfo.accessToken
+      }
+    });
+    context.commit('setMessage',response.data);
   },
   async fetchLikes(context, id) {
     await this.$axios.post(`/api/posts/${id}/likes`, {}, {

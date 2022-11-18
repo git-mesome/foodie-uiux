@@ -4,6 +4,11 @@
   <el-image src="/header/nav-logo.png" style="width: 70px"></el-image>
   <nuxt-link class="logo-text" :to="{path:'/'}">Foodi:e</nuxt-link>
   </div>
+  <div class="author">
+  <el-avatar :size="150" :src="$store.state.auth.loginInfo.profileImagePath" style="margin-left: 13px"
+    alt="작성자프로필"/>
+    <p>🌱 {{ $store.state.auth.loginInfo.nickname }} 🌱</p>
+  </div>
   <div class="icons">
     <el-button><i class="el-icon-menu"></i> 전체 보기</el-button>
     <el-button><i class="el-icon-present"></i> 나눔</el-button>
@@ -56,5 +61,18 @@ export default {
   color: #B5BAC9;
   margin: 10px;
   border: 0px;
+}
+.author{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #344B46;
+  font-size: 25px;
+}
+
+.author .el-avatar {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 </style>

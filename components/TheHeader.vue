@@ -49,24 +49,6 @@ import SearchInput from "../components/SearchInput";
 
 export default {
   components: {SearchInput},
-  data() {
-    return {
-      options: [{
-        label: '푸대원 정보',
-        options: [{
-          value: 'my-page',
-          label: '마이페이지'
-        }]
-      }, {
-        label: '기타',
-        options: [{
-          value: 'logout',
-          label: '로그아웃'
-        }]
-      }],
-      toggle: false,
-    }
-  },
   methods: {
     ...mapMutations({
       doLogout: 'auth/logout',
