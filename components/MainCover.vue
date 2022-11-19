@@ -1,6 +1,19 @@
 <template>
-  <div>
-    <div class="custom-shape-divider-bottom-1668078888">
+  <div class="main-cover">
+    <el-carousel height="75vh" class="carousel" indicator-position="outside" arrow="never" :interval=5000>
+      <el-carousel-item>
+        <el-image class="cover-image" src="/main-cover/main-logo.png"></el-image>
+        <pre>
+      공유를 시작하고
+          행복을 시작하세요.
+        </pre>
+        <el-image class="cover-image2" src="/main-cover/zero.png"></el-image>
+      </el-carousel-item>
+      <el-carousel-item>
+        <el-image class="cover-image3" src="/main-cover/main-cover2.png"></el-image>
+      </el-carousel-item>
+    </el-carousel>
+    <div class="custom-shape-divider-top-1668078888">
       <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path
           d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
@@ -13,14 +26,6 @@
           class="shape-fill"></path>
       </svg>
     </div>
-    <el-image class="cover-image" src="/main-cover/main-logo.png"></el-image>
-    <pre>
-      공유를 시작하고
-          행복을 시작하세요.
-    </pre>
-    <el-image class="cover-image2" src="/main-cover/zero.png"></el-image>
-
-    <el-image src="/main-cover/main-logo.png"></el-image>
   </div>
 </template>
 
@@ -32,16 +37,24 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Gaegu&family=Jua&family=Noto+Sans+KR:wght@500&display=swap');
-.custom-shape-divider-bottom-1668078888 {
+
+/*.main-cover{*/
+/*  height: 100vh;*/
+/*}*/
+
+.carousel {
   background-color: #DFF8D6;
-  width: auto;
-  height: 80vh;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
 }
 
-.custom-shape-divider-bottom-1668078888 svg {
+.custom-shape-divider-top-1668078888 {
+  background-color: white;
+  width: auto;
+  overflow: hidden;
+  /*line-height: 0;*/
+  /*transform: rotate(180deg);*/
+}
+
+.custom-shape-divider-top-1668078888 svg {
   position: relative;
   display: block;
   width: calc(153% + 1.3px);
@@ -49,27 +62,36 @@ export default {
   transform: rotateY(180deg);
 }
 
-.custom-shape-divider-bottom-1668078888 .shape-fill {
-  fill: #FFFFFF;
+.custom-shape-divider-top-1668078888 .shape-fill {
+  fill: #DFF8D6;
 }
 
 .cover-image {
   position: absolute;
-  top: 20%;
-  left: 20%;
+  top: 23%;
+  left: 15%;
   width: 400px;
 }
+
 pre {
   position: absolute;
-  top: 270px;
-  left: 33%;
+  top: 250px;
+  left: 27%;
   width: 421px;
   font-size: 50px;
 }
-.cover-image2{
+
+.cover-image2 {
   position: absolute;
   top: 20%;
-  left: 60%;
+  left: 53%;
   width: 400px;
+}
+
+.cover-image3 {
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 55%;
 }
 </style>

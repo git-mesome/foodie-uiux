@@ -109,7 +109,10 @@ export default {
       });
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          this.$message({
+            message: '게시글이 등록되었습니다!',
+            type: 'success',
+          })
         } else {
           console.log('error submit!!');
           return false;

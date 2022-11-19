@@ -2,11 +2,31 @@
   <el-row class="outline">
     <el-col class="top">
       <el-col>
-        <el-avatar shape="square" :size="60" fit="cover" :src="selectedChatRoom.postImagePath"></el-avatar>
-        <div class="title">{{ selectedChatRoom.postTitle }}</div>
+        <div v-if="selectedChatRoom.dealStatus === 'BOOK'" class="image-cover">
+          <p>예약중</p>
+        </div>
+        <div v-else-if="selectedChatRoom.dealStatus === 'FINISH'" class="image-cover2">
+          <pre>거래 완료</pre>
+        </div>
+        <el-avatar shape="square" :size="60" fit="scale-down" :src="selectedChatRoom.postImagePath">
+        </el-avatar>
+        <span class="title">{{ selectedChatRoom.postTitle }}</span>
       </el-col>
       <el-col class="button">
-        <el-button>거래 상태 변경</el-button>
+        <el-dropdown>
+          <el-button style="margin-right: 10px">거래 상태 변경</el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>
+              <div @click="book(selectedChatRoom.postId)">예약</div>
+            </el-dropdown-item>
+            <el-dropdown-item divided>
+              <div @click="cancel(selectedChatRoom.postId)">예약 취소</div>
+            </el-dropdown-item>
+            <el-dropdown-item divided>
+              <div @click="finish(selectedChatRoom.postId)">거래완료</div>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
         <el-button>채팅 삭제</el-button>
       </el-col>
     </el-col>
@@ -16,12 +36,12 @@
         <div class="owner" v-if="$store.state.auth.loginInfo.nickname === message.senderNickname">
           <el-avatar :size="50" :src="message.senderProfileImagePath" style="margin-left: 13px" alt="작성자프로필"/>
           <pre class="message">{{ message.message }}</pre>
-          <p class="date">{{ message.createDate.substring(11, 16)}}</p>
+          <p class="date">{{ message.createDate.substring(11, 16) }}</p>
         </div>
         <div v-else class="receiver">
           <el-avatar :size="50" :src="message.senderProfileImagePath" style="margin-right: 13px" alt="작성자프로필"/>
           <pre class="message2">{{ message.message }}</pre>
-          <p class="date">{{ message.createDate.substring(11, 16)}}</p>
+          <p class="date">{{ message.createDate.substring(11, 16) }}</p>
         </div>
       </el-row>
     </el-col>
@@ -48,8 +68,9 @@ export default {
   props: {
     selectedChatRoom: {
       type: Object,
-      default: () => {}
+      default: () => {
       }
+    }
   },
   data() {
     return {
@@ -108,7 +129,48 @@ export default {
         }
       );
     },
-  }
+    book(id) {
+      this.$confirm('게시물을 예약하시겠습니까?')
+        .then(async _ => {
+          await this.$axios.put(`/api/posts/${id}/book`, {},
+            {
+              headers: {
+                Authorization: 'Bearer ' + this.$store.state.auth.loginInfo.accessToken
+              }
+            });
+          this.$message({
+            message: '예약이 완료되었습니다.',
+            type: 'success',
+          })
+          this.$emit('refresh', 'BOOK')
+
+        })
+    },
+    async cancel(id) {
+          await this.$axios.put(`/api/posts/${id}/yet`, {},
+            {
+              headers: {
+                Authorization: 'Bearer ' + this.$store.state.auth.loginInfo.accessToken
+              }
+            });
+          this.$message({
+            message: '예약이 취소되었습니다.',
+            type: 'warning',
+          })
+          this.$emit('refresh', 'YET')
+
+    },
+    async finish(id) {
+      await this.$axios.put(`/api/posts/${id}/finish`, {},
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.auth.loginInfo.accessToken
+          }
+        });
+      this.$emit('refresh', 'FINISH')
+    }
+  },
+
 }
 </script>
 
@@ -119,6 +181,33 @@ export default {
   height: 68vh;
   padding: 20px;
 }
+
+.image-cover {
+  position: absolute;
+  display: flex;
+  height: 60px;
+  width: 60px;
+  align-items: center;
+  justify-content: center;
+  color: #BFE4E0;
+  background-color: rgba(55, 55, 55, 0.7);
+  border-radius: 5px;
+  z-index: 100;
+}
+
+.image-cover2 {
+  position: absolute;
+  display: flex;
+  height: 60px;
+  width: 60px;
+  align-items: center;
+  justify-content: center;
+  color: lightcoral;
+  background-color: rgba(55, 55, 55, 0.7);
+  border-radius: 5px;
+  z-index: 100;
+}
+
 
 .top {
   display: flex;
@@ -209,7 +298,7 @@ export default {
   color: #344B46;
 }
 
-.date{
+.date {
   display: flex;
   align-items: flex-end;
   padding: 0 5px;

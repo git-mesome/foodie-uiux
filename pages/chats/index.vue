@@ -13,7 +13,7 @@
             <ChatList @selectChatRoom="selectChatRoom"/>
           </el-col>
           <el-col class="right">
-            <Message v-if="selectedChatRoom" :selected-chat-room="selectedChatRoom"/>
+            <Message v-if="selectedChatRoom" :selected-chat-room="selectedChatRoom" @refresh="refreshChatRoom"/>
           </el-col>
         </el-row>
       </el-col>
@@ -39,8 +39,10 @@ export default {
     this.selectedChatRoom =  this.$route.query.id ?
       {
         chatRoomId: this.$route.query.id,
+        postId: this.$store.state.postDetail.postId,
         postTitle: this.$store.state.postDetail.title,
-        postImagePath: this.$store.state.postDetail.postImagePath[0]
+        postImagePath: this.$store.state.postDetail.postImagePath[0],
+        dealStatus: this.$store.state.postDetail.dealStatus
       } : undefined
   },
   methods: {
@@ -50,6 +52,9 @@ export default {
         this.selectedChatRoom = chatRoom
       });
     },
+    refreshChatRoom(dealStatus) {
+      this.selectedChatRoom.dealStatus = dealStatus
+    }
   },
 }
 </script>

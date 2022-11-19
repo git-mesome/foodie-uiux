@@ -22,6 +22,7 @@ export default {
   methods: {
     search() {
       this.$emit('search', this.searchKeyword)
+      this.searchKeyword=""
     }
   }
 }

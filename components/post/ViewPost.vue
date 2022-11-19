@@ -3,16 +3,20 @@
     <el-row class="view-post-header">
       나눠봐요!
     </el-row>
-    <el-tabs class="tabs" v-model="activeName" >
+    <el-tabs class="tabs" v-model="activeName">
       <el-tab-pane></el-tab-pane>
-<!--      <el-tab-pane label="교환" name="exchange">교환</el-tab-pane>-->
-<!--      <el-tab-pane label="레시피" name="recipe">레시피</el-tab-pane>-->
-
-      <el-row class="popular" :gutter='20' >
+      <el-row class="popular" :gutter='20'>
         <el-col :span="6" v-for="post in $store.state.posts" :key="post.postId">
-          <el-card  class="card" style="overflow:auto" :body-style="{ padding: '15px' }">
+          <el-card class="card" style="overflow:auto" :body-style="{ padding: '15px' }">
             <div class="main_image">
-              <el-image @click="moveDetailPage(post.postId)" style="width:100%; height: 250px; border-radius: 20px" :fit="fit"
+              <div v-if="post.dealStatus === 'BOOK'" class="image-cover">
+                <p>예약중</p>
+              </div>
+              <div v-else-if="post.dealStatus === 'FINISH'" class="image-cover2">
+                <pre>거래 완료</pre>
+              </div>
+              <el-image @click="moveDetailPage(post.postId)" style="width:100%; height: 250px; border-radius: 20px"
+                        :fit="fit"
                         :src="post.postImagePath" alt="게시글 이미지"/>
               <div class="like-button">
                 <el-image v-if="post.likesState" src="heart.png" @click="unLike(post.postId)"></el-image>
@@ -20,7 +24,8 @@
               </div>
             </div>
             <span class="title">{{ post.title }}</span>
-            <span v-if="post.dong" class="dong" style="color: #9B9B9B; font-family: Noto Sans KR, sans-serif;">{{post.gu}} {{ post.dong }}</span>
+            <span v-if="post.dong" class="dong"
+                  style="color: #9B9B9B; font-family: Noto Sans KR, sans-serif;">{{ post.gu }} {{ post.dong }}</span>
             <span v-else class="dong" style="color: #9B9B9B; font-family: Noto Sans KR, sans-serif;">지역 정보 없음</span>
             <div class="bottom">
             <span class="likes-count" style="color: #9B9B9B">
@@ -36,12 +41,7 @@
           </el-card>
         </el-col>
       </el-row>
-<!--      <el-pagination-->
-<!--        layout="prev, pager, next"-->
-<!--        :total="50">-->
-<!--      </el-pagination>-->
     </el-tabs>
-
   </div>
 </template>
 
@@ -153,5 +153,33 @@ export default {
   position: absolute;
   top: 80%;
   left: 3%;
+}
+
+.image-cover {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  color: #BFE4E0;
+  background-color: rgba(55, 55, 55, 0.7);
+  border-radius: 5px;
+  z-index: 100;
+}
+
+.image-cover2 {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  color: lightcoral;
+  background-color: rgba(55, 55, 55, 0.7);
+  border-radius: 5px;
+  z-index: 100;
 }
 </style>

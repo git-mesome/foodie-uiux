@@ -21,7 +21,6 @@ export default {
 
 <style scoped>
 .el-header {
-  height: 73px !important;
 }
 
 .el-main {
@@ -30,7 +29,7 @@ export default {
   margin-top: 12px;
 }
 
-.el-backtop{
+.el-backtop {
   height: 90px;
   width: 90px;
   box-shadow: black;

@@ -2,6 +2,12 @@
   <div class="detailPage">
     <el-carousel type="card" :autoplay="false" arrow="always" indicator-position="none">
       <el-carousel-item v-for="(path, i) in $store.state.postDetail.postImagePath" :key="i">
+        <div v-if="$store.state.postDetail.dealStatus === 'BOOK'" class="image-cover">
+          <p>예약중</p>
+        </div>
+        <div v-else-if="$store.state.postDetail.dealStatus === 'FINISH'" class="image-cover2">
+          <pre>거래 완료</pre>
+        </div>
         <el-image style="height: 400px; width: 100%" :fit="fit" :src="path" alt="게시한 이미지" :preview-src-list="path"/>
       </el-carousel-item>
     </el-carousel>
@@ -195,6 +201,35 @@ export default {
   display: flex;
   margin-bottom: 10px;
   justify-content: right;
+}
+
+
+.image-cover {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: #BFE4E0;
+  background-color: rgba(55, 55, 55, 0.7);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.image-cover2 {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-size: 50px;
+  align-items: center;
+  justify-content: center;
+  color: lightcoral;
+  background-color: rgba(55, 55, 55, 0.7);
+  border-radius: 5px;
+  z-index: 1;
 }
 
 </style>

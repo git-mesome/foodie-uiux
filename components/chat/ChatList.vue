@@ -3,7 +3,7 @@
     <el-row class="recent">RECENT CHAT</el-row>
     <el-row class="list">
       <el-row class="one-block" :class="selectChat" v-for="chat in $store.state.chatList"
-              @click.native="selectChatRoom(chat.chatRoomId, chat.postTitle, chat.postImagePath)"
+              @click.native="selectChatRoom(chat.chatRoomId, chat.postId, chat.postTitle, chat.postImagePath, chat.dealStatus)"
               :key="chat.chatRoomId">
         <el-col class="receiver-profile">
           <el-avatar :size="50"
@@ -44,8 +44,8 @@ export default {
     async initGetChat() {
       await this.$store.dispatch('fetchChatList');
     },
-    selectChatRoom(chatRoomId, postTitle, postImagePath) {
-      this.$emit('selectChatRoom', {chatRoomId, postTitle, postImagePath})
+    selectChatRoom(chatRoomId, postId, postTitle, postImagePath, dealStatus) {
+      this.$emit('selectChatRoom', {chatRoomId, postId, postTitle, postImagePath, dealStatus})
     },
     checkToSelect(check) {
       return this.check === check ?

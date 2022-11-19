@@ -40,6 +40,13 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+
+      '@openafg/nuxt-fullpage'
+    //   , {
+    //   activeSection: 0,
+    //   mouseWheelSensitivity: 120,
+    //   showIndicators: false
+    // }]
     // '@nuxtjs/auth-next',
     // '@nuxtjs/proxy'
   ],

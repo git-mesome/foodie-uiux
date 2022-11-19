@@ -18,7 +18,7 @@
         <nuxt-link :to="{path:'/posts/recipe'}">레시피</nuxt-link>
       </el-menu-item>
       <el-menu-item index="5" style="width: 100%" align="center">
-        <nuxt-link :to="{path:'/'}">고객센터</nuxt-link>
+        <nuxt-link :to="{path:'/customer'}">고객센터</nuxt-link>
       </el-menu-item>
     </ul>
     <SearchInput @search="searchPostList"/>
@@ -33,8 +33,8 @@
           <span>{{ $store.state.auth.loginInfo.nickname }}님<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item><nuxt-link :to="{path:'/my-page'}">마이 페이지</nuxt-link></el-dropdown-item>
-            <el-dropdown-item  divided >F&Q</el-dropdown-item>
-            <el-dropdown-item   >고객센터</el-dropdown-item>
+            <el-dropdown-item   ><nuxt-link :to="{path:'/customer'}">F&Q</nuxt-link></el-dropdown-item>
+            <el-dropdown-item   ><nuxt-link :to="{path:'/customer'}">고객센터</nuxt-link></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <el-button @click="logout">로그아웃</el-button>
@@ -91,6 +91,7 @@ a.nuxt-link-exact-active {
   align-items: center;
   padding: 0px 12px;
   height: 73px;
+  z-index: 1;
 }
 
 .navbar__logo {
