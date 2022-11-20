@@ -49,7 +49,6 @@
 
     <el-col class="bottom">
       <el-input class="text"
-                @keyup="sendMessage"
                 v-model="message"
                 type="textarea"
                 resize="none"
@@ -81,19 +80,12 @@ export default {
   },
   created() {
     this.connect()
-    console.log(this.selectedChatRoom)
     this.$store.dispatch('fetchMessage', this.selectedChatRoom.chatRoomId)
   },
   beforeDestroy() {
     this.stompClient.disconnect();
   },
   methods: {
-    sendMessage(e) {
-      if (e.keyCode === 13 && this.message.sendNickname !== '' && this.message !== '') {
-        this.send()
-        this.message = ''
-      }
-    },
     async send() {
       if (this.stompClient && this.stompClient.connected) {
         const msg = {

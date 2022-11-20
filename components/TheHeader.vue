@@ -68,7 +68,6 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 body {
   margin: 0;
@@ -89,7 +88,7 @@ a.nuxt-link-exact-active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 12px;
+  padding: 0 20px;
   height: 73px;
   z-index: 1;
 }
@@ -103,8 +102,8 @@ a.nuxt-link-exact-active {
   position: absolute;
   margin-top: 15px;
   margin-left: 10px;
-  color: black !important;
   font-family: 'Fredoka One', cursive;
+  color: black !important;
 }
 
 .navbar__menu {

@@ -21,6 +21,7 @@ export default {
 
 <style scoped>
 .el-header {
+  padding: 0 !important;
 }
 
 .el-main {

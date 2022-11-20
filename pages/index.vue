@@ -1,18 +1,18 @@
 <template>
-    <full-page>
-      <section class="section">
+    <div>
+      <div>
         <MainCover/>
-      </section>
-      <section class="section">
+      </div>
+      <div>
         <Intro/>
-      </section>
-      <section class="section">
+      </div>
+      <div>
         <WhatIsFoodie/>
-      </section>
-      <section class="section">
+      </div>
+      <div>
         <Earth/>
-      </section>
-    </full-page>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -35,8 +35,4 @@ export default {
 ::-webkit-scrollbar {
    display: none;
  }
-
-.section {
-  height: 100vh;
-}
 </style>

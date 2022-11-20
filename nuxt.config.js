@@ -41,7 +41,6 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
 
-      '@openafg/nuxt-fullpage'
     //   , {
     //   activeSection: 0,
     //   mouseWheelSensitivity: 120,

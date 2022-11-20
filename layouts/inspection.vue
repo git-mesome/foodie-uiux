@@ -5,16 +5,20 @@
       <nuxt-link class="logo-text" :to="{path:'/'}">Foodi:e</nuxt-link>
     </div>
     <p class="sorry">죄송합니다. 해당 페이지는 점검중입니다.</p>
-    <a href="/">
-      <el-button>홈으로 가기</el-button>
-    </a>
+      <el-button @click="check">홈으로 가기</el-button>
     <el-image src="/error/108.svg" style=" opacity: 0.5"></el-image>
 
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    check() {
+      this.$router.push('/')
+    }
+  }
+}
 </script>
 
 <style scoped>

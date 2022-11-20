@@ -125,6 +125,11 @@ export default {
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 18px;
+  width: 100%;
+  height: 36px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-family: "Noto Sans KR", sans-serif;
 }
 
