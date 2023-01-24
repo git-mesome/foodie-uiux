@@ -11,7 +11,12 @@ export default {
       {hid: 'description', name: 'description', content: ''},
       {name: 'format-detection', content: 'telephone=no'},
     ],
-    link: [{rel: 'icon', type: 'image/x-icon', href: '/header/nav-logo.png'}],
+    link: [
+      {rel: 'icon', type: 'image/x-icon', href: '/header/nav-logo.png'},
+      {rel: 'stylesheet',
+      type: 'text/css',
+      href: 'https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap'}
+    ],
     script: [
       {
         src: 'https://developers.kakao.com/sdk/js/kakao.js'

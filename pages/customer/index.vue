@@ -1,16 +1,16 @@
-<template>
-<div>
+<!--<template>-->
+<!--<div>-->
 
-</div>
-</template>
+<!--</div>-->
+<!--</template>-->
 
-<script>
-export default {
-  name: "index.vue",
-  layout: 'inspection'
-}
-</script>
+<!--<script>-->
+<!--export default {-->
+<!--  name: "index.vue",-->
+<!--  layout: 'inspection'-->
+<!--}-->
+<!--</script>-->
 
-<style scoped>
+<!--<style scoped>-->
 
-</style>
+<!--</style>-->

@@ -1,7 +1,7 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <div class="navbar__logo">
-      <el-image src="/header/nav-logo.png" style="width: 70px"></el-image>
+      <el-image src="/header/nav-logo.png" style="width: 70px"/>
       <nuxt-link class="logo-text" :to="{path:'/'}">Foodi:e</nuxt-link>
     </div>
     <ul class="navbar__menu">
@@ -22,7 +22,6 @@
       </el-menu-item>
     </ul>
     <SearchInput @search="searchPostList"/>
-
     <el-menu-item class="navbar__user" index="7">
       <nuxt-link v-if="!$store.state.auth.loginInfo.accessToken" :to="{path:'/login'}">로그인</nuxt-link>
       <div v-else>
